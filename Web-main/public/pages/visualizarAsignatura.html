@@ -3,41 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareas Asignadas al Estudiante</title>
+    <title>Tareas asignadas</title>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/pages/visualizarAsignatura.js" defer></script>
 </head>
 <body>
     <div class="blur-background"></div>
     <div class="container">
-        <h1 class="title">Tareas Asignadas al Estudiante</h1>
+        <h1 class="title">Tareas asignadas al estudiante</h1>
+
         <div class="status-title">
             <span>Estado:</span>
         </div>
+
         <div class="legend">
             <div class="color-box red"></div>
-            <span>  Muy tarde</span>
+            <span>Muy tarde</span>
         </div>
         <div class="legend">
             <div class="color-box white"></div>
-            <span>  A Tiempo</span>
+            <span>A tiempo</span>
         </div>
         <div class="legend">
             <div class="color-box green"></div>
-            <span>  Entregado</span>
+            <span>Entregado</span>
         </div>
-        <button id="cambiarOrdenBtn" class="submit-task-button">Cambiar Orden</button>
+
+        <button id="cambiarOrdenBtn" class="submit-task-button">Cambiar orden</button>
+
         <table id="tareasTable" class="styled-table">
             <thead>
                 <tr>
                     <th>Tarea</th>
                     <th>Descripción</th>
-                    <th>Fecha de Inicio</th>
-                    <th>Fecha Final</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha final</th>
                     <th>Entregas</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- Aquí se llenarán las tareas dinámicamente con JavaScript -->
             </tbody>
         </table>
     </div>
