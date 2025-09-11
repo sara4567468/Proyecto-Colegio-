@@ -7,10 +7,7 @@ function isEntregada(tarea_id){
       'Content-Type':'application/json',
       "Authorization":`Bearer ${sessionStorage.getItem('token')}`
     },
-    body:JSON.stringify({
-      tarea_id:tarea_id,
-      user_id:user_id
-    }),
+    body:JSON.stringify({tarea_id,user_id}),
   })
   .then(response=>response.json())
   .then(data=>data.success)
@@ -23,16 +20,11 @@ async function ordenarPorEstado(tareas){
     const entregada=await isEntregada(tarea.tarea_id)
     return {tarea,entregada}
   }))
-  const tareasOrdenadas=tareasConEstado.sort((a,b)=>{
-    if(a.entregada && !b.entregada){
-      return 1
-    }else if(!a.entregada && b.entregada){
-      return -1
-    }else{
-      return 0
-    }
-  }).map((tareaConEstado)=>tareaConEstado.tarea)
-  return tareasOrdenadas
+  return tareasConEstado.sort((a,b)=>{
+    if(a.entregada&&!b.entregada) return 1
+    if(!a.entregada&&b.entregada) return -1
+    return 0
+  }).map(t=>t.tarea)
 }
 async function aplicarStrategy(tareas,estrategia){
   return await estrategia(tareas)
@@ -45,28 +37,26 @@ async function fetchTareas(){
       'Content-Type':'application/json',
       "Authorization":`Bearer ${sessionStorage.getItem('token')}`
     },
-    body:JSON.stringify({
-      group_id:group_id
-    }),
+    body:JSON.stringify({group_id}),
   })
-  .then((response)=>response.json())
-  .then(async(data)=>{
+  .then(response=>response.json())
+  .then(async data=>{
     if(data.tareas&&data.tareas.length>0){
-      renderizarTareas(data.tareas,ordenarPorFechaFinalAscendente)
       if(ordenInicial){
         document.getElementById('cambiarOrdenBtn').innerHTML='Cambiar Orden: Por Estado'
-        ordenInicial=false
-        renderizarTareas(data.tareas,ordenarPorEstado)
+        renderizarTareas(data.tareas,ordenarPorFechaFinalAscendente)
       }else{
         document.getElementById('cambiarOrdenBtn').innerHTML='Cambiar Orden: Por Fecha'
-        ordenInicial=true
-        renderizarTareas(data.tareas,ordenarPorFechaFinalAscendente)
+        renderizarTareas(data.tareas,ordenarPorEstado)
       }
     }else{
       console.log("No hay tareas asignadas.")
     }
   })
-  .catch((error)=>alert('Error al cargar tareas:',error))
+  .catch(error=>{
+    console.error('Error al cargar tareas:',error)
+    alert('Error al cargar tareas')
+  })
 }
 async function renderizarTareas(dataTareas,orden){
   const tareasOrdenadas=await aplicarStrategy(dataTareas,orden)
@@ -97,14 +87,9 @@ async function renderizarTareas(dataTareas,orden){
           entregarTareaBtn.style.backgroundColor='red'
         }
       }else{
-        entregarTareaBtn.innerText='Entregar'
-        entregarTareaBtn.style.backgroundColor='white'
-        entregarTareaBtn.style.color='black'
-        if(entregada){
-          entregarTareaBtn.innerText='Editar'
-          entregarTareaBtn.style.backgroundColor=''
-          entregarTareaBtn.style.color='white'
-        }
+        entregarTareaBtn.innerText=entregada?'Editar':'Entregar'
+        entregarTareaBtn.style.backgroundColor=entregada?'blue':'white'
+        entregarTareaBtn.style.color=entregada?'white':'black'
       }
       entregarTareaBtn.id='entregarTareaBtn_'+tarea.tarea_id
       entregarTareaBtn.className='submit-task-button'
@@ -118,7 +103,8 @@ async function renderizarTareas(dataTareas,orden){
 }
 window.onload=function(){
   fetchTareas()
-  document.getElementById('cambiarOrdenBtn').onclick=async function(){
+  document.getElementById('cambiarOrdenBtn').onclick=function(){
+    ordenInicial=!ordenInicial
     fetchTareas()
   }
 }
