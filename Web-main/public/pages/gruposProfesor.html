@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grupos del Profesor</title>
+    <title>Grupos del profesor</title>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/pages/gruposProfesor.js" defer></script>
 </head>
 <body>
     <div class="blur-background"></div>
     <div class="container">
-        <h1 class="title">Grupos del Profesor</h1>
-        
+        <h1 class="title">Grupos del profesor</h1>
         <table id="gruposTable" class="styled-table">
             <thead>
                 <tr>
-                    <th>ID del Grupo</th>
-                    <th>Nombre del Grupo</th>
+                    <th scope="col">ID del grupo</th>
+                    <th scope="col">Nombre del grupo</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Las filas se insertarán dinámicamente -->
-            </tbody>
+            <tbody></tbody>
         </table>
-
         <div class="asignarTarea">
-            <button id="crearGrupoBtn" class="submit-task-button">Crear Grupo</button>
+            <button id="crearGrupoBtn" class="submit-task-button">Crear grupo</button>
         </div>
     </div>
 </body>
