@@ -3,46 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareas Asignadas al Grupo</title>
+    <title>Tareas asignadas al grupo</title>
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/pages/visualizarGrupo.js" defer></script>
 </head>
 <body>
     <div class="blur-background"></div>
     <div class="container">
-        <h1 class="title">Estudiantes Inscritos en el Grupo</h1>
+        <h1 class="title">Estudiantes inscritos en el grupo</h1>
         <table id="estudiantesTable" class="styled-table">
             <thead>
                 <tr>
-                    <th>Codigo de Estudiante</th>
+                    <th scope="col">Código de estudiante</th>
                 </tr>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
         </table>
         <div class="inscribirEstudiante">
-            <button id="inscribirEstudianteBtn" class="submit-task-button">Inscribir Estudiante</button>
+            <button id="inscribirEstudianteBtn" class="submit-task-button">Inscribir estudiante</button>
         </div>
-        <h1 class="title">Tareas Asignadas al Grupo</h1>
+        <h1 class="title">Tareas asignadas al grupo</h1>
         <div class="asignarTarea">
-            <button id="asignarTareaBtn" class="submit-task-button">Asignar Tarea</button>
+            <button id="asignarTareaBtn" class="submit-task-button">Asignar tarea</button>
         </div>
         <table id="tareasTable" class="styled-table">
             <thead>
                 <tr>
-                    <th>Tarea</th>
-                    <th>Descripción</th>
-                    <th>Fecha de Inicio</th>
-                    <th>Fecha Final</th>
-                    <th>Entregas</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th scope="col">Tarea</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Fecha de inicio</th>
+                    <th scope="col">Fecha final</th>
+                    <th scope="col">Entregas</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Las filas de tareas se llenarán dinámicamente con JavaScript -->
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </body>
