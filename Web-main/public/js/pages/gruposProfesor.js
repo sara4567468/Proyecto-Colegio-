@@ -4,17 +4,14 @@ function fetchGrupos(){
   fetch('http://localhost:3000/login',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      user:user,
-      passwd:passwd,
-    }),
+    body:JSON.stringify({user,passwd}),
   })
-  .then((response)=>response.json())
-  .then((data)=>{
+  .then(response=>response.json())
+  .then(data=>{
     console.log("data:",data)
-    if(data.grupos && data.grupos.length>0){
+    if(data.grupos&&data.grupos.length>0){
       let table=document.getElementById("gruposTable").getElementsByTagName('tbody')[0]
-      data.grupos.forEach((grupo)=>{
+      data.grupos.forEach(grupo=>{
         let row=table.insertRow()
         let cell1=row.insertCell(0)
         let cell2=row.insertCell(1)
@@ -29,8 +26,8 @@ function fetchGrupos(){
     }else{
       alert("No hay grupos disponibles.")
     }
-})
-.catch((error)=>console.error('Error al cargar los grupos:',error))
+  })
+  .catch(error=>console.error('Error al cargar los grupos:',error))
 }
 window.onload=function(){
   fetchGrupos()
