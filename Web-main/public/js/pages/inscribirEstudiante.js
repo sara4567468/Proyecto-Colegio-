@@ -8,14 +8,14 @@ document.getElementById("inscribirEstudianteForm").addEventListener("submit",fun
       "Content-Type":"application/json",
       "Authorization":`Bearer ${sessionStorage.getItem('token')}`
     },
-    body:JSON.stringify({
-      estudiante_id,
-      group_id
-    })
+    body:JSON.stringify({estudiante_id,group_id})
   })
   .then(response=>response.json())
   .then(data=>{
     alert(data.message)
   })
-  .catch(error=>alert("Error al inscribir estudiante:",error))
+  .catch(error=>{
+    console.error("Error al inscribir estudiante:",error)
+    alert("Error al inscribir estudiante")
+  })
 })
